@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "front-end-developer": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "front-end-developer/SKILL.md",
+      "computedHash": "54f448cbc0f0854284abd18a195220cf62ca13b0879005fac26040660ad287d5"
+    }
+  }
+}

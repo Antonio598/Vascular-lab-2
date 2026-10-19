@@ -1,25 +1,52 @@
-// Logo provisional en SVG, basado en la papelería. Reemplazar por el archivo definitivo cuando esté disponible.
+import { useId } from "react";
 
-export function Logo({ light = false, className = "" }: { light?: boolean; className?: string }) {
+// Isotipo: la "V" con la órbita roja del logo de Vascular Clinic.
+export function LogoMark({ light = false, animated = true, className = "" }: { light?: boolean; animated?: boolean; className?: string }) {
+  const id = useId().replace(/:/g, "");
   const blue = light ? "#ffffff" : "#1B4B8C";
   const red = light ? "#ff8a96" : "#D7263D";
   return (
-    <svg viewBox="0 0 250 80" className={className} role="img" aria-label="Vascular Lab">
-      {/* V */}
-      <path d="M4 8h17l14 44L49 8h17L44 72H26Z" fill={blue} />
-      {/* L */}
-      <path d="M52 30h15v29h22v13H52Z" fill={blue} />
-      {/* órbita roja */}
-      <path
-        d="M8 54c-6-6 6-20 30-31s45-14 49-7c2 4-3 10-12 16 5-6 7-10 5-12-5-5-24 0-42 10S10 47 13 55Z"
-        fill={red}
-      />
-      <text x="104" y="40" fontFamily="var(--font-fira), sans-serif" fontWeight="600" fontSize="31" fill={blue}>
-        Vascular
-      </text>
-      <text x="104" y="70" fontFamily="var(--font-fira), sans-serif" fontWeight="600" fontSize="31" fill={red}>
-        Lab
-      </text>
+    <svg viewBox="0 0 400 384" className={className} aria-hidden>
+      <defs>
+        <mask id={`orbit-${id}`} maskUnits="userSpaceOnUse" x="-50" y="-50" width="500" height="500">
+          <ellipse cx="200" cy="175" rx="215" ry="76" fill="white" />
+          <ellipse cx="200" cy="157" rx="190" ry="68" fill="black" />
+        </mask>
+      </defs>
+      <path className={animated ? "logo-v" : undefined} d="M0 0H72L174 290L276 0H345L203 384H145Z" fill={blue} />
+      <g className={animated ? "logo-orbit" : undefined}>
+        <g transform="rotate(-24 200 175)">
+          <rect x="-30" y="80" width="460" height="190" fill={red} mask={`url(#orbit-${id})`} />
+        </g>
+      </g>
     </svg>
+  );
+}
+
+// Logo completo: isotipo + "Vascular Lab". El texto es HTML para que escale y se lea bien en cualquier tamaño.
+export function Logo({
+  light = false,
+  animated = true,
+  className = "",
+  size = "md",
+}: {
+  light?: boolean;
+  animated?: boolean;
+  className?: string;
+  size?: "sm" | "md" | "lg";
+}) {
+  const sizes = {
+    sm: { mark: "h-9", text: "text-[19px]" },
+    md: { mark: "h-11 sm:h-12", text: "text-[22px] sm:text-[25px]" },
+    lg: { mark: "h-16", text: "text-[34px]" },
+  }[size];
+  return (
+    <span className={`logo group/logo inline-flex items-center gap-2.5 ${className}`}>
+      <LogoMark light={light} animated={animated} className={`${sizes.mark} w-auto shrink-0`} />
+      <span className={`font-display leading-[0.92] font-semibold tracking-[-0.01em] ${sizes.text}`}>
+        <span className={`block ${light ? "text-white" : "text-brand"}`}>Vascular</span>
+        <span className={`block ${light ? "text-[#ff8a96]" : "text-accent"}`}>Lab</span>
+      </span>
+    </span>
   );
 }

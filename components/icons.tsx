@@ -181,3 +181,19 @@ export function CategoryIcon({ id, ...props }: P & { id: CategoryId }) {
   const Icon = categoryIcons[id];
   return <Icon {...props} />;
 }
+
+export function PhoneIcon(props: P) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 4h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 6.1 6.1l1.4-2.3L20 15.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z" />
+    </svg>
+  );
+}
+
+export function SparkIcon(props: P) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
+    </svg>
+  );
+}

@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="bg-brand-dark text-white/85 print:hidden">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo light className="h-12 w-auto" />
+          <Logo light animated={false} />
           <p className="mt-4 text-sm leading-relaxed">{site.tagline} en Brisas del Golf, Panamá.</p>
         </div>
 

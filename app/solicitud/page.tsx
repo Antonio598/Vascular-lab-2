@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 function SheetHeader() {
   return (
     <div className="flex items-center justify-between gap-6 border-b-[6px] border-accent bg-mist px-6 py-4">
-      <Logo className="h-14 w-auto" />
+      <Logo size="lg" animated={false} />
       <ul className="space-y-0.5 text-right text-[13px] font-semibold text-brand">
         <li className="flex items-center justify-end gap-1.5">
           <WhatsAppIcon className="size-4 text-accent" /> {site.phoneDisplay}

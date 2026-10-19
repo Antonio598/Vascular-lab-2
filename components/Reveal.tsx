@@ -3,8 +3,20 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 // Aparición suave al entrar en pantalla. Con prefers-reduced-motion el CSS la desactiva.
-export function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  dir = "up",
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  dir?: "up" | "left" | "right" | "zoom";
+  as?: "div" | "li";
+}) {
+  const ref = useRef<HTMLDivElement & HTMLLIElement>(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -16,15 +28,15 @@ export function Reveal({ children, className = "", delay = 0 }: { children: Reac
           io.disconnect();
         }
       },
-      { rootMargin: "0px 0px -10% 0px" },
+      { rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
+    <Tag ref={ref} data-dir={dir} className={`reveal ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
       {children}
-    </div>
+    </Tag>
   );
 }

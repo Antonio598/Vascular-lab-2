@@ -5,6 +5,7 @@ import { CptList } from "@/components/CptList";
 import { ArrowRightIcon, CategoryIcon, ChevronDownIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
 import { CPT_MARKS_NOTE, CPT_NOTE, categories, studiesIn } from "@/lib/estudios";
 import { mapsDirectionsUrl, studyWaLink, waLink } from "@/lib/site";
+import { EcgLine } from "@/components/HeroVisual";
 import { OpenDetailsOnHash } from "@/components/OpenDetailsOnHash";
 
 export const metadata: Metadata = {
@@ -18,8 +19,9 @@ export default function EstudiosPage() {
   return (
     <>
       <OpenDetailsOnHash />
-      <section className="bg-gradient-to-br from-brand-dark to-brand py-16 text-white">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-dark to-brand py-16 text-white">
+        <EcgLine className="absolute inset-x-0 bottom-4 -z-10 h-20 w-full text-white/50" />
+        <div className="fade-up mx-auto max-w-5xl px-4 text-center sm:px-6">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
             Vascular Lab · Laboratorio vascular no invasivo y estudios cardiovasculares
           </p>

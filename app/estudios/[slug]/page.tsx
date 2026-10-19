@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { EcgLine } from "@/components/HeroVisual";
+import { LogoMark } from "@/components/Logo";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
 import { CptList } from "@/components/CptList";
@@ -46,8 +48,10 @@ export default async function StudyPage({ params }: Props) {
 
   return (
     <>
-      <section className={`bg-gradient-to-br ${head} py-14 text-white`}>
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+      <section className={`relative isolate overflow-hidden bg-gradient-to-br ${head} py-14 text-white`}>
+        <EcgLine className="absolute inset-x-0 bottom-4 -z-10 h-20 w-full text-white/50" />
+        <LogoMark light animated={false} className="absolute -top-10 -right-16 -z-10 hidden w-96 opacity-10 md:block" />
+        <div className="fade-up mx-auto max-w-5xl px-4 sm:px-6">
           <nav aria-label="Ruta" className="text-sm text-white/75">
             <ol className="flex flex-wrap items-center gap-1.5">
               <li>

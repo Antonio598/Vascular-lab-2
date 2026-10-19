@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fira_Sans } from "next/font/google";
+import { Fira_Sans, Jost } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,6 +10,14 @@ const fira = Fira_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-fira",
+  display: "swap",
+});
+
+// Tipografía geométrica del logo, usada también en los titulares.
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -35,8 +43,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={fira.variable}>
-      <body className="font-sans antialiased">
+    <html lang="es" className={`${fira.variable} ${jost.variable}`}>
+      <body className="pb-20 font-sans antialiased md:pb-0">
         <a
           href="#contenido"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-brand"

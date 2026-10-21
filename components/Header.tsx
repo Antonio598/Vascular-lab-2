@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { ArrowRightIcon, CloseIcon, MailIcon, MenuIcon, PinIcon, WhatsAppIcon } from "./icons";
-import { nav, site, waLink } from "@/lib/site";
+import { ArrowRightIcon, CloseIcon, MailIcon, MenuIcon, PhoneIcon } from "./icons";
+import { nav, site, telLink } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -33,20 +33,14 @@ export function Header() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-2 text-[13px]">
-          <p className="flex items-center gap-2">
-            <span className="relative flex size-2">
-              <span className="pulse-ring absolute inset-0 rounded-full bg-[#25D366]" />
-              <span className="relative size-2 rounded-full bg-[#25D366]" />
-            </span>
-            Citas por WhatsApp · {site.tagline}
-          </p>
+          <p>{site.tagline}</p>
           <div className="flex items-center gap-6">
+            <a href={telLink} className="flex items-center gap-1.5 hover:text-white">
+              <PhoneIcon className="size-4" /> {site.phoneDisplay}
+            </a>
             <a href={`mailto:${site.email}`} className="flex items-center gap-1.5 hover:text-white">
               <MailIcon className="size-4" /> {site.email}
             </a>
-            <span className="flex items-center gap-1.5">
-              <PinIcon className="size-4" /> {site.addressShort}
-            </span>
           </div>
         </div>
       </div>
@@ -56,9 +50,9 @@ export function Header() {
           scrolled ? "shadow-[0_8px_30px_rgb(15_47_92/0.08)]" : ""
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
-          <Link href="/#inicio" aria-label="Vascular Lab, inicio" onClick={() => setOpen(false)}>
-            <Logo />
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <Link href="/#inicio" aria-label="Vascular Lab, inicio" onClick={() => setOpen(false)} className="shrink-0">
+            <Logo className="h-10 sm:h-12" />
           </Link>
 
           <nav aria-label="Principal" className="hidden items-center gap-1 xl:flex">
@@ -74,26 +68,16 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shine hidden items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition hover:-translate-y-0.5 hover:bg-accent-dark sm:inline-flex"
-            >
-              <WhatsAppIcon className="size-4" /> Agendar cita
-            </a>
-            <button
-              type="button"
-              className="relative z-50 rounded-full p-2.5 text-brand transition hover:bg-ice xl:hidden"
-              aria-expanded={open}
-              aria-controls="menu-movil"
-              aria-label={open ? "Cerrar menú" : "Abrir menú"}
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? <CloseIcon className="size-7" /> : <MenuIcon className="size-7" />}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="relative z-50 rounded-full p-2.5 text-brand transition hover:bg-ice xl:hidden"
+            aria-expanded={open}
+            aria-controls="menu-movil"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <CloseIcon className="size-7" /> : <MenuIcon className="size-7" />}
+          </button>
         </div>
 
         {/* Barra de progreso de lectura */}
@@ -131,23 +115,15 @@ export function Header() {
             ))}
           </ul>
           <div
-            className={`mt-8 space-y-3 pb-10 text-slate-600 transition-all duration-500 ${open ? "opacity-100" : "opacity-0"}`}
+            className={`mt-8 space-y-3 pb-10 text-sm text-slate-600 transition-all duration-500 ${open ? "opacity-100" : "opacity-0"}`}
             style={{ transitionDelay: open ? "450ms" : "0ms" }}
           >
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-4 text-lg font-semibold text-white"
-            >
-              <WhatsAppIcon className="size-5" /> Agendar por WhatsApp
+            <a href={telLink} className="flex items-center gap-2">
+              <PhoneIcon className="size-4 text-accent" /> {site.phoneDisplay}
             </a>
-            <p className="flex items-center gap-2 pt-2 text-sm">
-              <PinIcon className="size-4 text-accent" /> {site.address}
-            </p>
-            <p className="flex items-center gap-2 text-sm">
+            <a href={`mailto:${site.email}`} className="flex items-center gap-2">
               <MailIcon className="size-4 text-accent" /> {site.email}
-            </p>
+            </a>
           </div>
         </nav>
       </div>

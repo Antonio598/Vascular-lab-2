@@ -1,5 +1,5 @@
 import { PinIcon, PhoneIcon, WhatsAppIcon } from "./icons";
-import { mapsDirectionsUrl, site, waLink } from "@/lib/site";
+import { mapsDirectionsUrl, telLink, waLink } from "@/lib/site";
 
 // Escritorio: botón flotante. Móvil: barra fija inferior con las tres acciones principales.
 export function WhatsAppFloat() {
@@ -29,7 +29,7 @@ export function WhatsAppFloat() {
             <WhatsAppIcon className="size-5" /> Agendar cita
           </a>
           <a
-            href={`tel:+${site.whatsapp}`}
+            href={telLink}
             aria-label="Llamar"
             className="flex size-12 items-center justify-center rounded-full bg-brand text-white active:scale-95"
           >

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EcgLine } from "@/components/HeroVisual";
-import { LogoMark } from "@/components/Logo";
+import { LogoIcon } from "@/components/Logo";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
 import { CptList } from "@/components/CptList";
 import { ArrowRightIcon, CategoryIcon, ClockIcon, FileIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
-import { CPT_MARKS_NOTE, CPT_NOTE, getCategory, getStudy, studies, studiesIn } from "@/lib/estudios";
+import { CPT_NOTE, footnotesFor, getCategory, getStudy, studies, studiesIn } from "@/lib/estudios";
 import { mapsDirectionsUrl, site, studyWaLink } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -44,13 +44,13 @@ export default async function StudyPage({ params }: Props) {
   const category = getCategory(study.category);
   const related = studiesIn(study.category).filter((s) => s.slug !== study.slug);
   const head = category.color === "red" ? "from-accent-dark to-accent" : "from-brand-dark to-brand";
-  const hasMarks = study.cpt.some((c) => /[*†]/.test(c.code));
+  const footnotes = footnotesFor(study);
 
   return (
     <>
       <section className={`relative isolate overflow-hidden bg-gradient-to-br ${head} py-14 text-white`}>
         <EcgLine className="absolute inset-x-0 bottom-4 -z-10 h-20 w-full text-white/50" />
-        <LogoMark light animated={false} className="absolute -top-10 -right-16 -z-10 hidden w-96 opacity-10 md:block" />
+        <LogoIcon light className="absolute top-6 -right-10 -z-10 hidden w-80 opacity-10 md:block" />
         <div className="fade-up mx-auto max-w-5xl px-4 sm:px-6">
           <nav aria-label="Ruta" className="text-sm text-white/75">
             <ol className="flex flex-wrap items-center gap-1.5">
@@ -107,10 +107,14 @@ export default async function StudyPage({ params }: Props) {
               <div className="mt-4">
                 <CptList cpt={study.cpt} />
               </div>
-              <p className="mt-5 border-t border-mist pt-4 text-sm leading-relaxed text-slate-500">
-                {CPT_NOTE}
-                {hasMarks && <> {CPT_MARKS_NOTE}</>}
-              </p>
+              <div className="mt-5 space-y-2 border-t border-mist pt-4 text-sm leading-relaxed text-slate-500">
+                <p>{CPT_NOTE}</p>
+                {footnotes.map((f) => (
+                  <p key={f.mark}>
+                    <strong className="text-brand">{f.mark}</strong> {f.text}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -127,16 +131,8 @@ export default async function StudyPage({ params }: Props) {
             <div className="rounded-2xl bg-brand p-6 text-white">
               <p className="font-semibold">¿Tienes una solicitud médica?</p>
               <p className="mt-1 text-sm text-white/85">
-                Al escribirnos, indica la región a evaluar y, si corresponde, si es derecho, izquierdo o bilateral.
+                Al consultarnos, indica la región a evaluar y, si corresponde, si es derecho, izquierdo o bilateral.
               </p>
-              <a
-                href={studyWaLink(study.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 font-semibold hover:bg-accent-dark"
-              >
-                <WhatsAppIcon className="size-5" /> Agendar por WhatsApp
-              </a>
             </div>
           </aside>
         </div>
@@ -145,7 +141,7 @@ export default async function StudyPage({ params }: Props) {
       {related.length > 0 && (
         <section className="bg-mist/50 py-14">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <h2 className="text-2xl font-bold text-brand">Otros {category.name.toLowerCase()}</h2>
+            <h2 className="text-2xl font-bold text-brand">Más en {category.name.toLowerCase()}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {related.map((s) => (
                 <li key={s.slug}>

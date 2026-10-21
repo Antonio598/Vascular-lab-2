@@ -2,22 +2,22 @@ import { Button } from "@/components/Button";
 import { CountUp } from "@/components/CountUp";
 import { Faq, type FaqItem } from "@/components/Faq";
 import { EcgLine, HeroVisual } from "@/components/HeroVisual";
-import { LogoMark } from "@/components/Logo";
+import { LogoIcon } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { StudyExplorer } from "@/components/StudyExplorer";
 import {
   ArrowRightIcon,
   ClockIcon,
-  DownloadIcon,
   GlobeIcon,
   MailIcon,
   PinIcon,
+  PhoneIcon,
   StethoscopeIcon,
   WhatsAppIcon,
 } from "@/components/icons";
 import { categories, studies } from "@/lib/estudios";
-import { mapsDirectionsUrl, mapsEmbedUrl, site, solicitudHref, waLink } from "@/lib/site";
+import { mapsDirectionsUrl, mapsEmbedUrl, site, telLink, waLink } from "@/lib/site";
 
 const faqs: FaqItem[] = [
   {
@@ -60,13 +60,10 @@ const steps = [
   { title: "Confirma tu cita", text: "Fecha, horario e instrucciones de preparación para tu visita." },
 ];
 
-const solicitudFields = [
-  "Nombre e identificación del paciente",
-  "Fecha",
+const referralTips = [
   "Estudio solicitado",
-  "Lateralidad: derecho, izquierdo o bilateral",
+  "Lateralidad: derecho, izquierdo o bilateral, cuando corresponda",
   "Indicación clínica o diagnóstico presuntivo",
-  "Médico solicitante",
 ];
 
 function Words({ text, start = 0, className = "" }: { text: string; start?: number; className?: string }) {
@@ -100,7 +97,7 @@ export default function Home() {
                 <span className="pulse-ring absolute inset-0 rounded-full bg-accent" />
                 <span className="relative size-2 rounded-full bg-accent" />
               </span>
-              Brisas del Golf · Laboratorio vascular no invasivo
+              Laboratorio vascular no invasivo
             </p>
 
             <h1 className="mt-6 text-[2.6rem] leading-[1.05] font-semibold text-brand sm:text-6xl lg:text-[4.25rem]">
@@ -115,7 +112,7 @@ export default function Home() {
             </h1>
 
             <p className="fade-up mt-6 text-lg font-medium text-brand sm:text-xl [animation-delay:600ms]">
-              Laboratorio vascular no invasivo y estudios cardiovasculares en Brisas del Golf.
+              Laboratorio vascular no invasivo y estudios cardiovasculares.
             </p>
             <p className="fade-up mt-3 max-w-xl leading-relaxed text-slate-600 sm:text-lg [animation-delay:700ms]">
               En Vascular Lab realizamos estudios para la evaluación de la circulación venosa y arterial, además de
@@ -129,9 +126,6 @@ export default function Home() {
               </Button>
               <Button href="/#estudios" variant="primary" icon={<ArrowRightIcon className="size-5" />}>
                 Ver nuestros estudios
-              </Button>
-              <Button href={mapsDirectionsUrl} variant="outline" icon={<PinIcon className="size-5" />}>
-                Cómo llegar
               </Button>
             </div>
 
@@ -199,8 +193,8 @@ export default function Home() {
             <Button href="/estudios/" variant="primary" icon={<ArrowRightIcon className="size-5" />}>
               Más información sobre los estudios
             </Button>
-            <Button href={waLink("Hola, quisiera consultar si realizan un estudio.")} variant="outline" icon={<WhatsAppIcon className="size-5 text-[#25D366]" />}>
-              ¿No encuentras tu estudio? Escríbenos
+            <Button href="/#contacto" variant="outline">
+              ¿No encuentras tu estudio? Contáctanos
             </Button>
           </Reveal>
         </div>
@@ -238,17 +232,15 @@ export default function Home() {
             <Reveal dir="left" className="lg:sticky lg:top-32 lg:self-start">
               <h3 className="text-3xl font-semibold text-brand">Preguntas frecuentes</h3>
               <p className="mt-3 text-slate-600">
-                ¿Tienes otra duda? Escríbenos y te respondemos por WhatsApp.
+                ¿Tienes otra duda? Contáctanos y te orientamos.
               </p>
               <div className="relative mt-6 overflow-hidden rounded-3xl bg-brand p-6 text-white">
-                <LogoMark light animated={false} className="absolute -right-8 -bottom-10 w-40 opacity-10" />
+                <LogoIcon light className="absolute -right-6 -bottom-8 w-36 opacity-10" />
                 <p className="font-display text-xl font-semibold">¿Listo para agendar?</p>
-                <p className="mt-1 text-white/80">Coordina tu cita en pocos mensajes.</p>
-                <div className="mt-5">
-                  <Button href={waLink()} variant="whatsapp" icon={<WhatsAppIcon className="size-5" />}>
-                    Consultar o agendar
-                  </Button>
-                </div>
+                <p className="mt-1 text-white/80">Encuentra nuestros datos de contacto y ubicación.</p>
+                <a href="/#contacto" className="mt-4 inline-flex items-center gap-2 font-semibold text-white hover:underline">
+                  Ubicación y contacto <ArrowRightIcon className="size-4" />
+                </a>
               </div>
             </Reveal>
             <Reveal dir="right">
@@ -261,7 +253,7 @@ export default function Home() {
       {/* ================= MÉDICOS ================= */}
       <section id="medicos" className="relative isolate overflow-hidden bg-brand-dark py-20 text-white sm:py-24">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgb(47_107_192/0.55),transparent_60%)]" />
-        <LogoMark light animated={false} className="spin-slow absolute -bottom-40 -left-40 -z-10 w-[32rem] opacity-[0.04] [animation-duration:120s]" />
+        <LogoIcon light className="absolute -bottom-24 -left-24 -z-10 w-[30rem] opacity-[0.05]" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
           <div>
@@ -271,35 +263,26 @@ export default function Home() {
               diagnóstico presuntivo.
             </SectionHeading>
             <Reveal className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap" delay={150}>
-              <Button href={solicitudHref} variant="whatsapp" icon={<DownloadIcon className="size-5" />}>
-                Descargar solicitud de estudios
+              <Button href="/estudios/" variant="white" icon={<ArrowRightIcon className="size-5" />}>
+                Ver catálogo por categoría
               </Button>
-              <Button
-                href={waLink("Hola, soy médico y quisiera coordinar un estudio para un paciente.")}
-                variant="ghost-light"
-                icon={<StethoscopeIcon className="size-5" />}
-              >
-                Contactar para coordinación
+              <Button href="/#contacto" variant="ghost-light" icon={<StethoscopeIcon className="size-5" />}>
+                Contacto para coordinación
               </Button>
-            </Reveal>
-            <Reveal delay={250}>
-              <a href="/estudios/" className="mt-6 inline-flex items-center gap-2 font-semibold text-white/80 hover:text-white">
-                Ver catálogo organizado por categoría <ArrowRightIcon className="size-4" />
-              </a>
             </Reveal>
           </div>
 
-          {/* Vista previa de la solicitud: las casillas se marcan solas */}
+          {/* Qué indicar al referir: las casillas se marcan solas */}
           <Reveal dir="right" className="mx-auto w-full max-w-lg">
-            <div className="rotate-2 rounded-2xl bg-white p-1.5 text-slate-700 shadow-2xl shadow-black/40 transition-transform duration-500 hover:rotate-0 hover:scale-[1.02]">
-              <div className="flex items-center justify-between rounded-t-xl border-b-4 border-accent bg-mist px-5 py-3">
-                <span className="font-display text-lg font-semibold text-brand uppercase">Solicitud de estudios</span>
-                <LogoMark animated={false} className="h-8 w-auto" />
+            <div className="rotate-2 rounded-3xl bg-white p-1.5 text-slate-700 shadow-2xl shadow-black/40 transition-transform duration-500 hover:rotate-0 hover:scale-[1.02]">
+              <div className="flex items-center justify-between gap-4 rounded-t-[1.25rem] border-b-4 border-accent bg-ice px-6 py-4">
+                <span className="font-display text-lg leading-tight font-semibold text-brand">Para facilitar la coordinación, indique:</span>
+                <LogoIcon className="w-12 shrink-0" />
               </div>
-              <ul className="space-y-3.5 p-5">
-                {solicitudFields.map((f, i) => (
+              <ul className="space-y-4 p-6">
+                {referralTips.map((f, i) => (
                   <li key={f} className="flex items-center gap-3">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-md border-2 border-brand">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg border-2 border-brand">
                       <svg viewBox="0 0 24 24" className="tick size-4" aria-hidden>
                         <path
                           d="m5 12.5 4.5 4.5L19 7.5"
@@ -309,12 +292,11 @@ export default function Home() {
                           strokeWidth="3.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          style={{ animationDelay: `${500 + i * 220}ms` }}
+                          style={{ animationDelay: `${500 + i * 280}ms` }}
                         />
                       </svg>
                     </span>
-                    <span className="flex-1 font-medium text-brand">{f}</span>
-                    <span className="hidden h-px w-16 bg-slate-300 sm:block" />
+                    <span className="font-medium text-brand">{f}</span>
                   </li>
                 ))}
               </ul>
@@ -327,7 +309,7 @@ export default function Home() {
       <section id="contacto" className="py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeading eyebrow="Ubicación y contacto" title="Visítanos en Brisas del Golf">
-            Estamos en Plaza Signature, piso 2, consultorio 5, Brisas del Golf, Panamá. Contáctanos para coordinar tu
+            Estamos en Brisas del Golf, Signature Plaza, piso 2, consultorio 5, Panamá. Contáctanos para coordinar tu
             cita y recibir indicaciones para tu visita.
           </SectionHeading>
 
@@ -335,7 +317,7 @@ export default function Home() {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {[
                 { icon: PinIcon, label: "Ubicación", value: site.address, href: mapsDirectionsUrl },
-                { icon: WhatsAppIcon, label: "Teléfono y WhatsApp", value: site.phoneDisplay, href: waLink() },
+                { icon: PhoneIcon, label: "Teléfono y WhatsApp", value: site.phoneDisplay, href: telLink },
                 { icon: MailIcon, label: "Correo electrónico", value: site.email, href: `mailto:${site.email}` },
                 { icon: ClockIcon, label: "Horario de atención", value: site.hours },
                 { icon: GlobeIcon, label: "Sitio web", value: site.domain },
@@ -373,18 +355,15 @@ export default function Home() {
 
             <Reveal dir="right" className="relative min-h-[380px] overflow-hidden rounded-3xl shadow-xl ring-1 ring-brand/10">
               <iframe
-                title="Mapa de Vascular Lab en Plaza Signature, Brisas del Golf"
+                title="Mapa de Vascular Lab en Signature Plaza, Brisas del Golf"
                 src={mapsEmbedUrl}
                 className="absolute inset-0 size-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <div className="absolute inset-x-3 bottom-3 flex flex-col gap-2 rounded-2xl bg-white/95 p-3 shadow-lg backdrop-blur sm:inset-x-auto sm:right-4 sm:bottom-4 sm:flex-row">
-                <Button href={mapsDirectionsUrl} variant="primary" icon={<PinIcon className="size-5" />} className="!py-3">
+              <div className="absolute inset-x-3 bottom-3 flex rounded-2xl bg-white/95 p-2 shadow-lg backdrop-blur sm:inset-x-auto sm:right-4 sm:bottom-4">
+                <Button href={mapsDirectionsUrl} variant="primary" icon={<PinIcon className="size-5" />} className="w-full !py-3">
                   Cómo llegar
-                </Button>
-                <Button href={waLink()} variant="whatsapp" icon={<WhatsAppIcon className="size-5" />} className="!py-3">
-                  Agendar por WhatsApp
                 </Button>
               </div>
             </Reveal>
@@ -408,11 +387,11 @@ export default function Home() {
             evaluación solicitada por tu médico.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href={waLink()} variant="white" icon={<WhatsAppIcon className="size-5 text-[#25D366]" />}>
-              Agendar por WhatsApp
-            </Button>
-            <Button href="/estudios/" variant="ghost-light">
+            <Button href="/estudios/" variant="white" icon={<ArrowRightIcon className="size-5" />}>
               Ver nuestros estudios
+            </Button>
+            <Button href={mapsDirectionsUrl} variant="ghost-light" icon={<PinIcon className="size-5" />}>
+              Cómo llegar
             </Button>
           </div>
         </Reveal>

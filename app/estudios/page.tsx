@@ -3,15 +3,15 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { CptList } from "@/components/CptList";
 import { ArrowRightIcon, CategoryIcon, ChevronDownIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
-import { CPT_MARKS_NOTE, CPT_NOTE, categories, studiesIn } from "@/lib/estudios";
-import { mapsDirectionsUrl, studyWaLink, waLink } from "@/lib/site";
+import { CPT_FOOTNOTES, CPT_NOTE, CPT_REFERENCE, categories, studiesIn } from "@/lib/estudios";
+import { mapsDirectionsUrl, waLink } from "@/lib/site";
 import { EcgLine } from "@/components/HeroVisual";
 import { OpenDetailsOnHash } from "@/components/OpenDetailsOnHash";
 
 export const metadata: Metadata = {
   title: "Nuestros estudios",
   description:
-    "Catálogo de estudios de Vascular Lab: venosos, arteriales, hemodinámicos, especializados y cardiovasculares, con descripción y CPT de referencia.",
+    "Catálogo de estudios de Vascular Lab: venosos, arteriales, hemodinámicos, otros estudios y cardiovasculares, con descripción y CPT de referencia.",
   alternates: { canonical: "/estudios/" },
 };
 
@@ -94,21 +94,13 @@ export default function EstudiosPage() {
                         <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">CPT de referencia</p>
                         <CptList cpt={s.cpt} compact />
                       </div>
-                      <div className="flex flex-wrap gap-2 lg:flex-col">
+                      <div>
                         <Link
                           href={`/estudios/${s.slug}/`}
                           className="inline-flex items-center gap-1.5 rounded-full border-2 border-brand px-4 py-2 text-sm font-semibold text-brand hover:bg-brand hover:text-white"
                         >
                           Ver ficha <ArrowRightIcon className="size-4" />
                         </Link>
-                        <a
-                          href={studyWaLink(s.name)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-dark"
-                        >
-                          <WhatsAppIcon className="size-4" /> Consultar
-                        </a>
                       </div>
                     </article>
                   ))}
@@ -121,7 +113,17 @@ export default function EstudiosPage() {
             <p>
               <strong className="text-brand">Nota sobre los códigos CPT:</strong> {CPT_NOTE}
             </p>
-            <p className="mt-2">{CPT_MARKS_NOTE}</p>
+            {CPT_FOOTNOTES.map((n) => (
+              <p key={n.mark} className="mt-2">
+                <strong className="text-brand">{n.mark}</strong> {n.text}
+              </p>
+            ))}
+            <p className="mt-2">
+              Referencia de alcance de codificación:{" "}
+              <a href={CPT_REFERENCE.url} target="_blank" rel="noopener noreferrer" className="font-medium text-brand underline">
+                {CPT_REFERENCE.label}
+              </a>
+            </p>
           </div>
         </div>
       </section>

@@ -40,7 +40,7 @@ export const categories: Category[] = [
   },
   {
     id: "otros",
-    name: "Otros estudios especializados",
+    name: "Otros estudios",
     color: "blue",
     intro: "Evaluaciones dirigidas a lesiones, accesos de hemodiálisis, circulación pélvica, obstétrica y oftálmica.",
   },
@@ -62,9 +62,6 @@ const AORTA_CAVA_ILIACOS: Cpt[] = [
   { code: "93979", name: "Dúplex de aorta, vena cava inferior o vasos ilíacos, unilateral o limitado." },
 ];
 
-const FISIOLOGICO_LIMITADO: Cpt[] = [
-  { code: "93922*", name: "Estudio fisiológico arterial no invasivo de extremidades, bilateral limitado, de 1–2 niveles." },
-];
 
 export const studies: Study[] = [
   // Venosos
@@ -93,7 +90,7 @@ export const studies: Study[] = [
   },
   {
     slug: "doppler-venoso-abdominopelvico",
-    name: "Doppler venoso abdominopélvico: vena cava inferior y venas ilíacas",
+    name: "Doppler venoso abdominopélvico (vena cava inferior e ilíacas)",
     category: "venosos",
     description:
       "Evalúa la vena cava inferior y las venas ilíacas para investigar obstrucciones y alteraciones del flujo venoso en el abdomen y la pelvis.",
@@ -101,7 +98,7 @@ export const studies: Study[] = [
   },
   {
     slug: "mapeo-venoso-preoperatorio",
-    name: "Mapeo venoso preoperatorio para varices",
+    name: "Mapeo venoso preoperatorio",
     category: "venosos",
     description:
       "Identifica el recorrido, diámetro y características de las venas para planificar el tratamiento de las varices.",
@@ -143,8 +140,8 @@ export const studies: Study[] = [
     ],
   },
   {
-    slug: "doppler-renal",
-    name: "Doppler renal",
+    slug: "doppler-arterias-renales",
+    name: "Doppler de arterias renales",
     category: "arteriales",
     description:
       "Estudia la circulación sanguínea de los riñones y ayuda a investigar estrechamientos de las arterias renales.",
@@ -170,20 +167,14 @@ export const studies: Study[] = [
 
   // Hemodinámicos
   {
-    slug: "indice-tobillo-brazo",
-    name: "Índice tobillo-brazo (ITB)",
+    slug: "indice-tobillo-brazo-dedo-brazo",
+    name: "Índice tobillo-brazo (ITB) y/o índice dedo-brazo (IDB) con equipo automatizado",
     category: "hemodinamicos",
     description:
-      "Compara la presión arterial de los tobillos con la de los brazos para valorar la circulación arterial hacia las piernas.",
-    cpt: FISIOLOGICO_LIMITADO,
-  },
-  {
-    slug: "indice-dedo-brazo",
-    name: "Índice dedo-brazo (IDB)",
-    category: "hemodinamicos",
-    description:
-      "Compara la presión arterial de un dedo del pie con la del brazo para complementar la evaluación de la circulación hacia los pies.",
-    cpt: FISIOLOGICO_LIMITADO,
+      "Compara las presiones de los tobillos y/o de los dedos de los pies con las de los brazos mediante equipo automatizado, para valorar la circulación arterial de las extremidades inferiores. El ITB y el IDB se realizan según la solicitud y la evaluación clínica.",
+    cpt: [
+      { code: "93922*", name: "Estudio fisiológico arterial no invasivo de extremidades, bilateral limitado, de 1–2 niveles." },
+    ],
   },
   {
     slug: "pletismografia-arterial-pvr",
@@ -213,7 +204,7 @@ export const studies: Study[] = [
   },
   {
     slug: "evaluacion-masa-lesion-vascular",
-    name: "Evaluación de masa o lesión vascular",
+    name: "Evaluación de masa / lesión vascular",
     category: "otros",
     description:
       "Estudia una masa o lesión para determinar su relación con los vasos sanguíneos y evaluar el flujo en su interior.",
@@ -227,7 +218,7 @@ export const studies: Study[] = [
   },
   {
     slug: "accesos-hemodialisis",
-    name: "Evaluación de accesos para hemodiálisis: fístula o injerto",
+    name: "Evaluación de accesos para hemodiálisis (fístula/injerto)",
     category: "otros",
     description:
       "Examina el flujo del acceso vascular para detectar estrechamientos, coágulos u otras alteraciones que pueden afectar su funcionamiento.",
@@ -258,12 +249,12 @@ export const studies: Study[] = [
     ],
   },
   {
-    slug: "doppler-arteria-oftalmica",
-    name: "Doppler de arteria oftálmica",
+    slug: "doppler-arteria-oftalmica-embarazada",
+    name: "Doppler de arteria oftálmica en embarazada",
     category: "otros",
     description:
-      "Evalúa la dirección y velocidad del flujo sanguíneo en la arteria que contribuye a la irrigación del ojo.",
-    cpt: [{ code: "93888†", name: "Doppler transcraneal de arterias intracraneales, estudio limitado." }],
+      "Evalúa el flujo sanguíneo de la arteria oftálmica materna durante el embarazo como complemento de la valoración hemodinámica, según indicación obstétrica.",
+    cpt: [{ code: "Por confirmar†", name: "Pendiente de validación para el estudio aislado de arteria oftálmica materna." }],
   },
 
   // Cardiovasculares
@@ -284,7 +275,7 @@ export const studies: Study[] = [
   },
   {
     slug: "holter",
-    name: "Holter de 24 o 48 horas",
+    name: "Holter 24 h / 48 h",
     category: "cardiovasculares",
     description:
       "Registra continuamente la actividad eléctrica del corazón durante las actividades habituales para detectar alteraciones del ritmo.",
@@ -297,7 +288,7 @@ export const studies: Study[] = [
   },
   {
     slug: "mapa-presion-arterial",
-    name: "Monitoreo ambulatorio de presión arterial (MAPA)",
+    name: "MAPA - monitoreo ambulatorio de presión arterial",
     category: "cardiovasculares",
     description:
       "Mide automáticamente la presión arterial durante el día y el sueño, habitualmente durante 24 horas.",
@@ -313,8 +304,26 @@ export const studies: Study[] = [
 export const CPT_NOTE =
   "Los nombres de los códigos están resumidos en español. La codificación definitiva depende del procedimiento realizado, su extensión y los requisitos de la aseguradora.";
 
-export const CPT_MARKS_NOTE =
-  "Los códigos marcados con * o † son de referencia y su aplicación debe confirmarse según la técnica empleada y la aseguradora.";
+export const CPT_FOOTNOTES = [
+  {
+    mark: "*",
+    text: "93922: referencia condicionada al estudio fisiológico documentado; la medición del ITB por sí sola no basta para asignar este código. Usar equipo automatizado no determina por sí mismo el CPT.",
+  },
+  {
+    mark: "†",
+    text: "El CPT del Doppler de arteria oftálmica materna queda pendiente de validación. El 93888 consignado en la versión anterior describe un Doppler transcraneal limitado y no se presenta aquí como equivalencia confirmada para este estudio aislado.",
+  },
+];
+
+export const CPT_REFERENCE = {
+  label: "CMS, Non-Invasive Vascular Studies (L34045)",
+  url: "https://www.cms.gov/medicare-coverage-database/view/lcd.aspx?LCDId=34045",
+};
+
+// Notas al pie que aplican a un estudio, según las marcas de sus códigos.
+export function footnotesFor(study: Study) {
+  return CPT_FOOTNOTES.filter((f) => study.cpt.some((c) => c.code.includes(f.mark)));
+}
 
 export function getCategory(id: CategoryId) {
   return categories.find((c) => c.id === id)!;

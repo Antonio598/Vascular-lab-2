@@ -1,4 +1,4 @@
-import { LogoMark } from "./Logo";
+import { LogoIcon } from "./Logo";
 import { CategoryIcon, HeartPulseIcon } from "./icons";
 
 // Onda Doppler arterial trifásica, repetida (decorativa).
@@ -28,7 +28,7 @@ export function HeroVisual() {
 
       {/* Isotipo */}
       <div className="absolute inset-[24%] flex items-center justify-center rounded-full bg-white shadow-[0_30px_80px_-20px_rgb(15_47_92/0.35)] ring-1 ring-brand/5">
-        <LogoMark className="float w-[58%]" />
+        <LogoIcon className="float w-[56%]" />
       </div>
 
       {/* Tarjeta: Doppler */}

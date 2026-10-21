@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Laboratorio vascular no invasivo y estudios cardiovasculares en Brisas del Golf, Panamá. Doppler venoso y arterial, estudios hemodinámicos, ECG, ecocardiograma, Holter y MAPA. Agenda por WhatsApp.",
+    "Laboratorio vascular no invasivo y estudios cardiovasculares en Panamá. Doppler venoso y arterial, estudios hemodinámicos, ECG, ecocardiograma, Holter y MAPA. Agenda por WhatsApp.",
   openGraph: {
     type: "website",
     locale: "es_PA",

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { categories } from "@/lib/estudios";
-import { nav, site, waLink } from "@/lib/site";
+import { nav, site, telLink } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -9,8 +9,8 @@ export function Footer() {
     <footer className="bg-brand-dark text-white/85 print:hidden">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo light animated={false} />
-          <p className="mt-4 text-sm leading-relaxed">{site.tagline} en Brisas del Golf, Panamá.</p>
+          <Logo light className="h-12" />
+          <p className="mt-4 text-sm leading-relaxed">{site.tagline}.</p>
         </div>
 
         <div>
@@ -43,8 +43,8 @@ export function Footer() {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-white">Contacto</h2>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">
-                WhatsApp {site.phoneDisplay}
+              <a href={telLink} className="hover:text-white hover:underline">
+                Teléfono y WhatsApp: {site.phoneDisplay}
               </a>
             </li>
             <li>
@@ -52,7 +52,11 @@ export function Footer() {
                 {site.email}
               </a>
             </li>
-            <li>{site.address}</li>
+            <li>
+              <Link href="/#contacto" className="hover:text-white hover:underline">
+                Ver ubicación
+              </Link>
+            </li>
             <li className="text-white/60">{site.hours}</li>
           </ul>
         </div>

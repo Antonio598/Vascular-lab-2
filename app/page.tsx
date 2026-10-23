@@ -56,7 +56,7 @@ const faqs: FaqItem[] = [
 
 const steps = [
   { title: "Escríbenos por WhatsApp", text: `Contáctanos al ${site.phoneDisplay} para consultar disponibilidad.` },
-  { title: "Indica el estudio", text: "Nombre del estudio, región a evaluar y lateralidad si corresponde." },
+  { title: "Comparte tu solicitud médica", text: "Envíanos la orden de tu médico para identificar el estudio y la región que se evaluará." },
   { title: "Confirma tu cita", text: "Fecha, horario e instrucciones de preparación para tu visita." },
 ];
 

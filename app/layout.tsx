@@ -34,7 +34,6 @@ export const metadata: Metadata = {
     locale: "es_PA",
     siteName: site.name,
   },
-  icons: { icon: "/logo.svg" },
 };
 
 export const viewport: Viewport = {
